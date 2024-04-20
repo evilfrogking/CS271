@@ -1,0 +1,36 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Or.hdl
+
+ /**
+ * Or gate:
+ * out = 1 if (a == 1 or b == 1)
+ *       0 otherwise
+ */
+
+CHIP Or {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // x Or y = Not(Not(x) And Not(y)))
+    // Put your code here:
+
+    // Not sure what is failing here
+    Not (in=a, out=notA);
+    Not (in=b, out=notB);
+    // accidentally did a=notB
+    And (a=notA, b=notB, out=notAAndNotB);
+    Not (in=notAAndNotB, out=out);
+}
+
+// I'm getting messed up on the variables,
+// like when to use in=, a=. or b=
+
+// when a=0 and b=0, i keep getting an output of 1, which is wrong.
+
+// did it using Nand instead, not super happy with that though
+// Nand(a=a,b=a,out=nandA);
+// Nand(a=b,b=b,out=nandB);
+// Nand(a=nandA,b=nandB,out=out);
