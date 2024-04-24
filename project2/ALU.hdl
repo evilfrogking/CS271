@@ -43,36 +43,31 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
-   // zx/ zy
-   Mux16(a=x, b=false, sel=zx, out=outZX);
-   Mux16(a=y, b=false, sel=zy, out=outZY);
-   // nx / ny
-   Not16(in=outZX, out=notOutZX);
-   Not16(in=outZY, out=notOutZY);
-    // select zx | zy
-    // select nx | ny
-   Mux16(a=outZX, b=notOutZX, sel=nx, out=outNX);
-   Mux16(a=outZY, b=notOutZY, sel=ny, out=outNY);
-   // x+y / x&y
-   Add16(a=outNX, b=outNY, out=outAdd);
-   And16(a=outNX, b=outNY, out=outAnd);
-    // select x+y|x&y
-   Mux16(a=outAdd, b=outAnd, sel=f, out=outF);
-    // no / setup other outs / out
-   Not16(in=outF, out=notOutF);
-   Mux16(a=outF, b=notOutF, sel=no, out[0..7]=outZR1, out[8..15]=outZR2, out[15]=outNG, out=out);
-
-   // zr out
-   Or8Way(in=outZR1, out=out1);
-   Or8Way(in=outZR2, out=out2);
-   Or(a=out1, b=out2, out=notZR);
-   Not(in=notZR, out=zr);
-
-   // ng out, only need MSB
-   FullAdder(a=outNG, b=true, sum=overflow, carry=ng);
-
-
+    // zx nx
+    Mux16(a=x, b=false, sel=zx, out=outx);
+    Not16(in=outx, out=noutx);
+    Mux16(a=outx, b=noutx, sel=nx, out=outNX);
+    // zy ny
+    Mux16(a=y, b=false, sel=zy, out=outy);
+    Not16(in=outy, out=nouty);
+    Mux16(a=outy, b=nouty, sel=ny, out=outNY);
+    // add and
+    Add16(a=outNX, b=outNY, out=outAdd);
+    And16(a=outNX, b=outNY, out=outAnd);
+    // f
+    Mux16(a=outAnd, b=outAdd, sel=f, out=outf);
+    // no
+    Not16(in=outf, out=noutf);
+    Mux16(a=outf, b=noutf, sel=no, out=out, out[0..7]=out07, out[8..15]=out815, out[15]=outNG);
+    // zr
+    Or8Way(in=out07, out=zr07);
+    Or8Way(in=out815, out=zr815);
+    Or(a=zr07, b=zr815, out=zr07815);
+    Not(in=zr07815, out=zr);
+    //ng
+    And(a=outNG, b=true, out=ng);
 }
 
 // I drew the ALU from the lecture, I will link to it in my github
 // it helped a LOT
+// I accidentally capitalized a character in one of my variables.... devestating
