@@ -43,4 +43,36 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+   // zx/ zy
+   Mux16(a=x, b=false, sel=zx, out=outZX);
+   Mux16(a=y, b=false, sel=zy, out=outZY);
+   // nx / ny
+   Not16(in=outZX, out=notOutZX);
+   Not16(in=outZY, out=notOutZY);
+    // select zx | zy
+    // select nx | ny
+   Mux16(a=outZX, b=notOutZX, sel=nx, out=outNX);
+   Mux16(a=outZY, b=notOutZY, sel=ny, out=outNY);
+   // x+y / x&y
+   Add16(a=outNX, b=outNY, out=outAdd);
+   And16(a=outNX, b=outNY, out=outAnd);
+    // select x+y|x&y
+   Mux16(a=outAdd, b=outAnd, sel=f, out=outF);
+    // no / setup other outs / out
+   Not16(in=outF, out=notOutF);
+   Mux16(a=outF, b=notOutF, sel=no, out[0..7]=outZR1, out[8..15]=outZR2, out[15]=outNG, out=out);
+
+   // zr out
+   Or8Way(in=outZR1, out=out1);
+   Or8Way(in=outZR2, out=out2);
+   Or(a=out1, b=out2, out=notZR);
+   Not(in=notZR, out=zr);
+
+   // ng out, only need MSB
+   FullAdder(a=outNG, b=true, sum=overflow, carry=ng);
+
+
 }
+
+// I drew the ALU from the lecture, I will link to it in my github
+// it helped a LOT
