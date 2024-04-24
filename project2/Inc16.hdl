@@ -14,4 +14,7 @@ CHIP Inc16 {
 
     PARTS:
    // Put you code here:
+   Add16(a=in, b[0]=true, out=out);
 }
+
+//only want to add 1 integer to entire 16 bits
