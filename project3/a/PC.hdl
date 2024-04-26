@@ -17,4 +17,17 @@ CHIP PC {
 
     PARTS:
     // Put your code here:
+    Inc16(in = leftovers, out = pc);
+
+    Mux16(a = leftovers, b = pc, sel = inc, out = mux1);
+    Mux16(a = mux1, b = in, sel = load, out = mux2);
+    Mux16(a = mux2, b = false, sel = reset, out = mux3);
+
+    Register(in = mux3, load = true, out = out, out = leftovers);
 }
+
+// oof, i had to really switch up the ways ive been thinking for like 5 chips
+// http://nand2tetris-questions-and-answers-forum.52.s1.nabble.com/PC-Hdl-td4026543.html#a4029050
+// this helped a lot!
+// i get to the first diagram after i got stuck and tried to work from there
+
