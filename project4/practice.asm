@@ -95,20 +95,36 @@ Session 9
 // R0 = 255
 // R1 = 42
 
-@255
-D=A
-@R0
-M=D
-@42
-D=A
-@R1
-M=D
-// D=42 currently
-@R0
-A=M // should load 255
-M=D // should be in 255, and load 42 into it
-(END)
-    @END
-    0;JMP
+// @255
+// D=A
+// @R0
+// M=D
+// @42
+// D=A
+// @R1
+// M=D
+// // D=42 currently
+// @R0
+// A=M // should load 255
+// M=D // should be in 255, and load 42 into it
+// (END)
+//     @END
+//     0;JMP
+
+//---------------------------------------------
+
+// Gets R1=RAM[R0]
+// Usage: Put some nonnegative value in R0
+
+// @R0 // 1012
+// A=M
+// D=M
+
+// @R1 // 100
+// M=D // store 100 at address 1012
+// (END)
+//     @END
+//     0;JMP
 
 
+//---------------------------------------------
