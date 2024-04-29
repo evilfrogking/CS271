@@ -21,3 +21,5 @@
 // counter++
 // unconditional jump to address where conditional jump starts
 // end of program
+// END
+//      0;JMP
