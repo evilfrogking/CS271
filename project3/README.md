@@ -7,7 +7,7 @@ I'll do those tomorrow :)
 Yay!!
 ## Programmer Comments
 Moved to README for convenience
-### a
+### /a
 ### Bit.hdl
   // the two outs were tricky, but its just outing the same thing
   // under two different variables,
@@ -33,7 +33,7 @@ Moved to README for convenience
   // these are a lot harder to check the tests for,
   // its not as simple as "test passed!"
   // because the clock goes on forever
-### b
+### /b
 ### RAM16K.hdl
   // of COURSE this is the one I copy and paste so I can just edit the addresses
   // it wasnt a big deal
