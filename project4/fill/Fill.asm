@@ -16,7 +16,13 @@
 // make a sumation for the entire screen
 // LOOP
 // if keypress=true (if D is == 0)
+    // @KBD
+    // D=m
+    // @LOOP
+    // D;JEQ
 // sumation to make screen black
 // else
 // sumation to make screen white
 // goto LOOP
+
+// hm maybe not quite, but closer
