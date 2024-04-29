@@ -12,3 +12,11 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
+
+// make a sumation for the entire screen
+// LOOP
+// if keypress=true
+// sumation to make screen black
+// else
+// sumation to make screen white
+// goto LOOP
