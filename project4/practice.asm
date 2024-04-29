@@ -78,3 +78,37 @@ Session 9
 //     0;JMP
 
 //---------------------------------------------
+
+// Sets RAM[R0] to -1
+// Usage: Put some non-negative value in R0
+
+// @R0 //1013
+// A=M
+// M=-1 // sets the value at the address 1013 to -1
+
+//---------------------------------------------
+
+// Sets RAM[R0] to R1
+// Usage: Put some non-negative value in R0,
+//        and some value in R1
+
+// R0 = 255
+// R1 = 42
+
+@255
+D=A
+@R0
+M=D
+@42
+D=A
+@R1
+M=D
+// D=42 currently
+@R0
+A=M // should load 255
+M=D // should be in 255, and load 42 into it
+(END)
+    @END
+    0;JMP
+
+
