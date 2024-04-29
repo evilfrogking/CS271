@@ -15,7 +15,7 @@
 
 // make a sumation for the entire screen
 // LOOP
-// if keypress=true
+// if keypress=true (if D is == 0)
 // sumation to make screen black
 // else
 // sumation to make screen white
