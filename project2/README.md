@@ -4,7 +4,7 @@ There was a bit of an issue towards the end of the ALU; there wasn't an Or16Way,
 I also have messed up a variable. Overall, it's a simple fix.
 ## Programmer Comments
 Moved to README for convenience
-### ALD.hdl
+### ALU.hdl
   // I drew the ALU from the lecture, I will link to it in my github
   // it helped a LOT
   // I accidentally capitalized a character in one of my variables.... devestating
