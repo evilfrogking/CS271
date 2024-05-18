@@ -13,10 +13,10 @@
 // put in value of R0 and R1
 // put in a counter into one of the registers, maybe R3, starts at o
 // conditional jump, does counter == R0?
-        if
+//        if
 //          jump to address where stinstruction ends?
 //      else
-            continue
+//            continue
 // add R1 to R2
 // counter++
 // unconditional jump to address where conditional jump starts
