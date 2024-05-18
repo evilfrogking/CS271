@@ -10,18 +10,7 @@
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
 // Put your code here.
-// put in value of R0 and R1
-// put in a counter into one of the registers, maybe R3, starts at o
-// conditional jump, does counter == R0?
-//        if
-//          jump to address where stinstruction ends?
-//      else
-//            continue
-// add R1 to R2
-// counter++
-// unconditional jump to address where conditional jump starts
-// end of program
-// END
-//      0;JMP
 
-// TAKE 2
+
+
+

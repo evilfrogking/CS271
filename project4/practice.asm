@@ -4,17 +4,17 @@ Session 9
 */
 
 // Sets R2 to R0 + R1 +17
-// @R0
-// D=M
+@R0
+D=M
 
-// @R1
-// D=D+M // R1<- R0+ R1
+@R1
+D=D+M // R1<- R0+ R1
 
-// @17
-// D=D+A // All added together in D
+@17
+D=D+A // All added together in D
 
-// @R2
-// M=D // Store in R2
+@R2
+M=D // Store in R2
 
 //---------------------------------------------
 
@@ -116,15 +116,15 @@ Session 9
 // Gets R1=RAM[R0]
 // Usage: Put some nonnegative value in R0
 
-// @R0 // 1012
-// A=M
-// D=M
+@R0 // 1012
+A=M
+D=M
 
-// @R1 // 100
-// M=D // store 100 at address 1012
-// (END)
-//     @END
-//     0;JMP
+@R1 // 100
+M=D // store 100 at address 1012
+(END)
+    @END
+    0;JMP
 
 
 //---------------------------------------------
