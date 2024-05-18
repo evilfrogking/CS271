@@ -13,21 +13,3 @@
 
 // Put your code here.
 
-// do I want to use variables?
-// LOOP
-    // @KBD
-    // D=M
-    // if keypress==false (if D is == 0)
-        // @WHITE
-        // D;JEQ
-    // if keypress==true (if D>0 or D!=0)
-        // @BLACK
-        // D;JGT or D;JNE
-// WHITE
-    // sumation for white screen
-    // M=-1
-    // goto LOOP
-// BLACK
-    // summation to black screen
-    // M = 0 // is that right?
-    // gotto LOOP
