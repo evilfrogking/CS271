@@ -6,7 +6,7 @@
 ### FILL
 DATE?? TIME?? -- I will finish this project by Wednesday, May 14th  
 DATE?? TIME?? -- I needed to update the date I finish the project, I had a roadbump  
-DATE?? TIME?? --UPDATE: I will finish the project on Friday, 5/17/24. Sorry for the continued delays. My fiance went out of town, and I needed to pick up a lot of the chores and animal care while he was gone, and I'm a bit behind now. I also started a new job! Thanks, Kevin, for all you do to keep my ship chugging along.   
+DATE?? TIME?? -- UPDATE: I will finish the project on Friday, 5/17/24. Sorry for the continued delays. My fiance went out of town, and I needed to pick up a lot of the chores and animal care while he was gone, and I'm a bit behind now. I also started a new job! Thanks, Kevin, for all you do to keep my ship chugging along.   
 DATE?? TIME?? -- Shoot looks like I'm going to need to tackle Fill tomorrow. Very sleepy.   
 5/19/2024 10:16 PM -- Finished fill! Sam and I worked on the design together, then ended up combining our code to get a really smooth running fill. Here is a log of that conversation.  
 TL;DR After testing Sam's code while running the animation, I noticed that the white summation fully runs if you did not hit a key fast enough while the code ran. We set it up to where the loops check for a keypress at the beginning of each iteration, creating a much smoother and responsive program!  
