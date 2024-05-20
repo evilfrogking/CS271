@@ -5,13 +5,10 @@ do I want to use variables?
 LOOP
     @KBD
     D=M
-    // if keypress==false (if D is == 0)
-    @WHITE
-    D;JEQ
     // if keypress==true (if D>0 or D!=0)
     @BLACK
     D;JGT or D;JNE
-WHITE
+    //automatically runs the summation for the white screen
     // sumation for white screen
     // M=-1 // -1 == 1111111...1
     // goto LOOP
@@ -20,3 +17,15 @@ WHITE
     // M = 1 // is that right?
     // gotto LOOP
 
+(BLACK)
+    @KBD
+    D=M
+    @LOOP
+    D;JEQ // if a key is not pressed during the loop, goes to loop
+
+
+(WHITE)
+    @KBD
+    D=M
+    @LOOP
+    D;JNE // if a key is pressed during the loop, goes to loop
