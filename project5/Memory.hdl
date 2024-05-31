@@ -28,5 +28,10 @@ CHIP Memory {
 
     PARTS:
     // Put your code here:
-    
+    DMux4Way(in=input, sel=selector, a=outputA, b=outputB, c=outputC, d=outputD);
+
+    RAM16K(in=input16, load=loading, address=address14 out=output16);
+
+    Screen(in=input, load=load, address=addr, out=output);
+    Keyboard(out=output);
 }
