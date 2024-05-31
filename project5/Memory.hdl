@@ -28,12 +28,18 @@ CHIP Memory {
 
     PARTS:
     // Put your code here:
-    DMux4Way(in=input, sel=selector, a=outputA, b=outputB, c=outputC, d=outputD);
 
-    RAM16K(in=input16, load=loading, address=address14 out=output16);
+    // Selects if the input should go to the RAM or the Screen/Keyboard
+    DMux(in=load, sel=address[14], a=outRAMLoad, b=outS_KBD);
+    // Selects if the input should do to the Screen or Keyboard (it will not be hooked up to the keybooard)
+    DMux(in=load, sel=address[13], a=outScreenLoad, b=outDeadKBD);
 
-    Screen(in=input, load=load, address=addr, out=output);
-    Keyboard(out=output);
+    // Memory block
+    RAM16K(in=in, load=outRAMLoad, address=address[0..13] out=outRAM);
+    Screen(in=in, load=outScreenLoad, address=address[0..12], out=outScreen);
+    Keyboard(out=outKBD); // no in!!!
 
-    Mux4Way16(a=inA, b=inB, c=inC, d=inD, sel=selector, out=out);
+    Mux4Way16(a=outRAM , b=outRAM, c=outScreen, d=outKBD, sel=address[13..14], out=out);
 }
+
+// It is so hard to type KBD and not CBD or KGB ahahaha.
