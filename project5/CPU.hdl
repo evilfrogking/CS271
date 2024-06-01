@@ -42,54 +42,109 @@ CHIP CPU {
     // Put your code here:
 
     // ALU
-    ALU(x=outD, y=outA-M, zx=instruction[11], nx=instruction[10], zy=instruction[9],
-        ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, out= outALU, zr=zr, ng=ng); //maybe just out ALU?
-    
+        ALU(x=outD, y=outA-M, zx=instruction[11], nx=instruction[10], zy=instruction[9],
+            ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, out= outALU, zr=zr, ng=ng);
 
     // Registers
-    ARegister(in=inA, load=loadA, out=outA);
-    DRegister(in=outALU, load=loadD, out=outD);
-    PC(in=outA, load=loadPC, inc=inc, reset=reset, out[0..14]=pc); // could it not be pc[0..14] ?
+        ARegister(in=inA, load=loadA, out=outA, out[0..14]=addressM);
+        DRegister(in=outALU, load=loadD, out=outD);
+        PC(in=outA, load=loadPC, inc=true, reset=reset, out[0..14]=pc);
 
     // Muxes
-    // instA Mux
-    Mux(a=outALU, b=instruction, sel=instA, out=inA); // not instruction[12]?
-    // AM-ALU Mux
-    Mux(a=outA, b=inM, sel=AM-ALU, out=outA-M);
+        // instA Mux
+        Mux16(a=outALU, b=instruction, sel=instA, out=inA);
+        // AM-ALU Mux
+        Mux16(a=outA, b=inM, sel=AM-ALU, out=outA-M);
 
     // Logic Gates
-        /* instA Mux
-            - Negate; if instA ==1 after negation, got to AReg.
-        */
-        Not(in=instruction[15], out=instA);
-
-        /*DRegister - loadD
+        // Registers
+            // ARegister 0 loadA
+            And(a=instC, b=instruction[5], out=destA);
+            Or(a=instA, b=destA, out=loadA);
+            /*DRegister - loadD
             - Check if MSB is 1 AND dest D bit is set
             */
-        And(a=instruction[15], b=instruction[4], out=outD);
+            And(a=instruction[15], b=instruction[4], out=loadD);
+
+            /*PC
+                - Jump logics:
+                    JUMP | j1  j2  j3 <-(instruction[0..2])
+                    -------------------
+                    null | 0   0   0
+                    JGT  | 0   0   1  <- instruction[0]
+                    JEQ  | 0   1   0  <- instruction[1]
+                    JGE  | 0   1   1  <- instruction[1+0]
+                    JLT  | 1   0   0  <- instruction[2]
+                    JNE  | 1   0   1  <- instruction[2+0]
+                    JLE  | 1   1   0  <- instruction[2+1]
+                    JMP  | 1   1   1  <- instruction[2+1+0]
+            */
+                // Check if it is a C instruction
+                Not(in=instA, out=instC);
+                /* JGT
+                    - needs to check if a number is not 0 or negative
+                    - if pos == 1, number is positive; if pos == 0, number is negative
+                */
+                Or(a=zr, b=ng, out=ZorN);
+                Not(in=ZorN, out=pos);
+                And(a=instruction[0], b=pos, out=JGT);
+
+                /*JEQ
+                    - if the number is zero AND the instruction bit is on, then jump
+                */
+                And(a=zr, b=instruction[1], out=JEQ);
+
+                /*JGE
+                    - if pos == 1 OR zr == 1
+                */
+                Or(a=JGT, b=JEQ, out=JGE);
+
+                /*JLT
+                    - if ng == 1 AND the instruction bit is on, jump
+                */
+                And(a=ng, b=instruction[2], out=JLT);
+
+                // JNE
+                Or(a=JGT, b=JLT, out=JNE);
+
+                // JLE
+                Or(a=JLT, b=JEQ, out=JLE); 
+
+                /*JMP
+                    - unconditinal jump
+                */
+                Or(a=JGE, b=JLT, out=JMP);
+
+                /*loadPC 
+                    - if any of the conditions are true
+                    and MSB is on, loadPC == 1
+                */
+                Or(a=JGT, b=JEQ, out=J1);
+                Or(a=JGE, b=J1, out=J2);
+                Or(a=JLT, b=J2, out=J3);
+                Or(a=JNE, b=J3, out=J4);
+                Or(a=JLE, b=J4, out=J5);
+                Or(a=JMP, b=J5, out=J6);
+                And(a=instC, b=J6, out=loadPC);
+        // Muxes
+            /* instA Mux
+                - Negate; if instA ==1 after negation, got to AReg.
+            */
+            Not(in=instruction[15], out=instA);
+
+            /*AM-ALU Mux
+                - if it is a c instruction AND the A bit is on.
+            */
+            And(a=instC, b=instruction[12], out=AM-ALU);
         
-        /*PC inc or loadPC
-            - Increment is true unless loadPC is true.
-            - Jump logics:
-                JUMP | j1  j2  j3 <-(instruction[0..2])
-                -------------------
-                null | 0   0   0
-                JGT  | 0   0   1  <- instruction[0]
-                JEQ  | 0   1   0  <- instruction[1]
-                JGE  | 0   1   1
-                JLT  | 1   0   0  <- instruction[2]
-                JNE  | 1   0   1
-                JLE  | 1   1   0
-                JMP  | 1   1   1
-        */
-
-
-
+        // Out
+            // loadM & writeM
+            And(a=instC, b=instruction[3], out=loadM, out= writeM);
 }
 
 
 /*
 I gave up on keeping track of variables here.
 Instead, I focused on keeping track of the instruction bits I was using.
-instruction[14, 13, 12, 5, 3]
+instruction[5] <----- still alomst missed this guy
 */
