@@ -29,35 +29,67 @@ CHIP CPU {
 
     IN  inM[16],         // M value input  (M = contents of RAM[A])
         instruction[16], // Instruction for execution
-        reset;           // Signals whether to re-start the current
+        reset;           // Signals whether to re-start the current // done
                          // program (reset==1) or continue executing
                          // the current program (reset==0).
 
-    OUT outM[16],        // M value output
+    OUT outM[16],        // M value output //done
         writeM,          // Write to M? 
         addressM[15],    // Address in data memory (of M)
-        pc[15];          // address of next instruction
+        pc[15];          // address of next instruction //done
 
     PARTS:
     // Put your code here:
 
     // ALU
     ALU(x=outD, y=outA-M, zx=instruction[11], nx=instruction[10], zy=instruction[9],
-        ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, zr=, ng=);
+        ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, out= outALU, zr=zr, ng=ng); //maybe just out ALU?
     
 
     // Registers
-    ARegister(in=input, load=load, out=output);
+    ARegister(in=inA, load=loadA, out=outA);
+    DRegister(in=outALU, load=loadD, out=outD);
+    PC(in=outA, load=loadPC, inc=inc, reset=reset, out[0..14]=pc); // could it not be pc[0..14] ?
 
     // Muxes
+    // instA Mux
+    Mux(a=outALU, b=instruction, sel=instA, out=inA); // not instruction[12]?
+    // AM-ALU Mux
+    Mux(a=outA, b=inM, sel=AM-ALU, out=outA-M);
+
+    // Logic Gates
+        /* instA Mux
+            - Negate; if instA ==1 after negation, got to AReg.
+        */
+        Not(in=instruction[15], out=instA);
+
+        /*DRegister - loadD
+            - Check if MSB is 1 AND dest D bit is set
+            */
+        And(a=instruction[15], b=instruction[4], out=outD);
+        
+        /*PC inc or loadPC
+            - Increment is true unless loadPC is true.
+            - Jump logics:
+                JUMP | j1  j2  j3 <-(instruction[0..2])
+                -------------------
+                null | 0   0   0
+                JGT  | 0   0   1  <- instruction[0]
+                JEQ  | 0   1   0  <- instruction[1]
+                JGE  | 0   1   1
+                JLT  | 1   0   0  <- instruction[2]
+                JNE  | 1   0   1
+                JLE  | 1   1   0
+                JMP  | 1   1   1
+        */
+
 
 
 }
 
 
 /*
-VARIABLES (just trying ot keep up with everything)
-IN: outD | outA-M
-Load: instruction[15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-OUT: outM[]
+I gave up on keeping track of variables here.
+Instead, I focused on keeping track of the instruction bits I was using.
+instruction[14, 13, 12, 5, 3]
 */
