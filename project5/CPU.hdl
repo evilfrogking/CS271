@@ -40,15 +40,24 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
-    Mux16(a=inA, b=inB, sel=selector, out=out);
+
+    // ALU
+    ALU(x=outD, y=outA-M, zx=instruction[11], nx=instruction[10], zy=instruction[9],
+        ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, zr=, ng=);
+    
+
+    // Registers
     ARegister(in=input, load=load, out=output);
 
-    Mux16(a=, b=, sel=, out=);
-    ALU(x=inputX16, y=inputY16, zx=zeroX, nx=negateX, zy=zeroY, ny=negateY, 
-        f=whatCompute, no=negateOutput, out=output16, zr=outEquals0, ng=outNegative);
+    // Muxes
 
-    DRegister(in=input, load=load, out=output);
-
-    PC(in=input16, load=loading, inc=increment, reset=reset, out=output16);
 
 }
+
+
+/*
+VARIABLES (just trying ot keep up with everything)
+IN: outD | outA-M
+Load: instruction[15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+OUT: outM[]
+*/
