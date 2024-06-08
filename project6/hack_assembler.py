@@ -22,6 +22,7 @@ def main():
     print(f"parsed_lines: {parsed_lines}")
 
     # generate machine code
+    # create generate machine code function, which 
 
     # write machine code to a file
 
@@ -86,6 +87,64 @@ def init_comp_lookup_dict() -> dict:
     comp_lookup["M-D"] = "1000111"
     comp_lookup["D&M"] = "1000000"
     comp_lookup["D|M"] = "1010101"
+
+    return comp_lookup
+
+def init_dest_lookup_dict() -> dict:
+    """_summary_
+
+    Returns:
+        dict: _description_
+    """
+    # build dest look up dict as a comp instruction as the key and its control bits as the value
+    dest_lookup = {}
+
+    dest_lookup["null"]    = "000"
+    dest_lookup["M"]   = "001"
+    dest_lookup["D"]   = "010"
+    dest_lookup["DM"]  = "011"
+    dest_lookup["A"]   = "100"
+    dest_lookup["AM"]  = "101"
+    dest_lookup["AD"]  = "110"
+    dest_lookup["ADM"] = "111"
+
+    return dest_lookup
+
+def init_jump_lookup_dict() -> dict:
+    """_summary_
+
+    Returns:
+        dict: _description_
+    """
+    # build jump look up dict as a comp instruction as the key and its control bits as the value
+    jump_lookup = {}
+
+    jump_lookup["null"] = "000"
+    jump_lookup["JGT"]  = "001"
+    jump_lookup["JEQ"]  = "010"
+    jump_lookup["JGE"]  = "011"
+    jump_lookup["JLT"]  = "100"
+    jump_lookup["JNE"]  = "101"
+    jump_lookup["JLE"]  = "110"
+    jump_lookup["JMP"]  = "111"
+
+    return jump_lookup
+
+def generate_machine_code(line: str) -> str:
+    """ 
+
+    Args:
+        line (str): _description_
+
+    Returns:
+        str: _description_
+    """
+    #take line, check for A_instruction, C_instruction, or L_instruction, break line into components
+    # as needed, interact with symbol table as needed
+    # use lookup dictionaries to translate asm to hack and return hack
+    pass
+
+
 
 
 
