@@ -1,9 +1,9 @@
 # Computer Architecture/ Assembly Language Final Project - The Assembler
 ## Table of contents
 1. [Assignment Instructions](https://www.nand2tetris.org/project06)
-2. [Program Description]()
-3. [Programmer Comments]()
-4. [TO-DO]()
+2. [Program Description](https://github.com/evilfrogking/CS271/blob/main/project6/README.md#program-description)
+3. [Programmer Comments](https://github.com/evilfrogking/CS271/blob/main/project6/README.md#programmer-comments)
+4. [TO-DO](https://github.com/evilfrogking/CS271/blob/main/project6/README.md#to-do)
 5. [Tests]()
 
 ## Program Description
