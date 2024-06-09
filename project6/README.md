@@ -63,51 +63,51 @@ To compile:
 >Sam — 06/04/2024 8:28 PM  
 >Okay nice!  
 >evilfrogking — 06/04/2024 8:31 PM  
->thanks for voicing that fear! if it takes like, very little time to actually complete then i can let you know by saturday about the change in plans  
->Sam — 06/04/2024 8:31 PM  
->Okokioi sounds good!  
->evilfrogking — 06/06/2024 10:27 AM  
->(Image of confirmation for collaboration on the final project)  
->BOOM  
->Sam — 06/06/2024 10:28 AM  
->Hell yeah
->evilfrogking — 06/06/2024 9:34 PM  
->hey! I sent an email to the dean to request info about turning grades in late  
->Greetings Kristina,
->As the term draws close, so does the Computer Science program. Like many of my peers, I have concerns regarding the end of the program and what options >professors have for finalizing grades. This email includes some of those students, my computer science professor, and my advisor so that this clarification can >be provided to more students in a similar situation as mine.
->I understand that, under normal circumstances, professors can enter grades after the end of the term and have access to upgrading those grades later on if >necessary. At the end of last term, I had the opportunity to turn in my final project on the Monday of spring break rather than during my final due date with my >professor's permission. With the program ending and the sudden departure of one of the computer science professors, I am aware that my current professor, Joseph >Jess, has taken on many additional classes to provide students with as many credits as possible here at LBCC toward their Computer Science degrees. During this >stressful time for students and professors, I wanted clarification on whether departing professors would have access to updating grades after the end of this >term. I understand there may be a reasonable period when that is no longer possible.
->Many aspects of the program's end have felt confusing, sudden, and frustrating, and I would like to avoid these feelings by reaching out for clarification from >you here at the end of the term. I understand that you too have a lot on your plate as the programs ends here in the next week, and I deeply appreciate the time >and effort you have taken to read and respond to this email.
->Thank you for the clarification,
->Aspen Frazee
->also, I need to finish this final before i can work on the CS final. I was a bit more optimisitic than i realised trying to start the CS final today. I WILL be >working on it exclusively tomorrow
->Sam — 06/06/2024 9:36 PM
->ooooh nice that's a good email
->and that's completely fair! it'll be easier to work on with less stress too
->I'm thinking of finishing up some late work today and potentially starting on the final a littleeeee bit tonight, I got a very rough outline done yesterday but I >got tired and no actual code was written I just read the instructions and some of the chapter lol
->tomorow might be a bit busy for me due to having two full classes and another full project 😭
->(off topic but another cursed thing about digital logic: we have to copy paste our verilog code onto plain microsoft word 😭 its so terrible)
->evilfrogking — 06/06/2024 9:44 PM
->you are so good man
->tomorrow i was gonna focus on collecting info, setting up the documentation including like a schedule guide, a todo list, and a chat log of our convos, and >HOPEFULLY get a little code written
->I am not worried about it at all! i have class for one hour on friday (which i might have to miss anyways because i have an appartment inspection)
->and then im 100% focused on the CS final until sunday when I work. I am planning on dedicating 1-2 hours a day to study for calculus, but I was going to do that >througout my cs studying (like if I got stuck)
->im also okay with like. if I feel like ive gotten pretty far to just shift focus on calculus until you are able to work on it some more. weve been working >together for so long now i know we are gonna get it done hahaha
->evilfrogking — 06/06/2024 9:44 PM
->whaaaaaaaaa what the fuck nooooooo why 😭
->saturday was gonna be my big coding day, and then monday and tuesday
->Sam — 06/06/2024 9:46 PM
->heck yeah! Im also pretty confident we can get it done in time, CS crunch time is more enjoyable to me than other classes crunch time too 😭
->evilfrogking — 06/06/2024 9:47 PM
->dude same hahahaha
->so we wanna try it in c++? I think if saturday hits and im really struggling with it then ill just switch the python and let you know
->but i am like way more fresh with c++ so idk if python would really help me much
->Sam — 06/06/2024 9:48 PM
->hell yeah c++!
->I was looking for libraries yestderday, I think <map> and <vector> might be our bread and butter, 😭 I started with thinking about importing our old structures >from last term and what we might want for our array/linked lists yestderday before realizing we dont have to build all of that anymore and we can just use >vectors like normal people 😭
->evilfrogking — 06/06/2024 9:52 PM
->oh my god i was so scared reading your message hahaha like "wait why would we need to use our structures - oh thank god we can use vectors"
->god bless vectors my guy, truly unsung heroes
->[Meme depicting vectors and cooler arrays](https://cdn.discordapp.com/attachments/1100605396395233333/1248499889558786139/e73mycwq33j91.png?ex=666686a1&is=66653521&hm=773992c5850d5a73a1a55bce5f1e2690198fcd84dad0e1e9fdca7ff19b6257ec&)
+thanks for voicing that fear! if it takes like, very little time to actually complete then i can let you know by saturday about the change in plans  
+Sam — 06/04/2024 8:31 PM  
+Okokioi sounds good!  
+evilfrogking — 06/06/2024 10:27 AM  
+(Image of confirmation for collaboration on the final project)  
+BOOM  
+Sam — 06/06/2024 10:28 AM  
+Hell yeah
+evilfrogking — 06/06/2024 9:34 PM  
+hey! I sent an email to the dean to request info about turning grades in late  
+Greetings Kristina,
+As the term draws close, so does the Computer Science program. Like many of my peers, I have concerns regarding the end of the program and what options professors have for finalizing grades. This email includes some of those students, my computer science professor, and my advisor so that this clarification can be provided to more students in a similar situation as mine.
+I understand that, under normal circumstances, professors can enter grades after the end of the term and have access to upgrading those grades later on if necessary. At the end of last term, I had the opportunity to turn in my final project on the Monday of spring break rather than during my final due date with my professor's permission. With the program ending and the sudden departure of one of the computer science professors, I am aware that my current professor, Joseph Jess, has taken on many additional classes to provide students with as many credits as possible here at LBCC toward their Computer Science degrees. During this stressful time for students and professors, I wanted clarification on whether departing professors would have access to updating grades after the end of this term. I understand there may be a reasonable period when that is no longer possible.
+Many aspects of the program's end have felt confusing, sudden, and frustrating, and I would like to avoid these feelings by reaching out for clarification from you here at the end of the term. I understand that you too have a lot on your plate as the programs ends here in the next week, and I deeply appreciate the time and effort you have taken to read and respond to this email.
+Thank you for the clarification,
+Aspen Frazee
+also, I need to finish this final before i can work on the CS final. I was a bit more optimisitic than i realised trying to start the CS final today. I WILL be working on it exclusively tomorrow
+Sam — 06/06/2024 9:36 PM
+ooooh nice that's a good email
+and that's completely fair! it'll be easier to work on with less stress too
+I'm thinking of finishing up some late work today and potentially starting on the final a littleeeee bit tonight, I got a very rough outline done yesterday but I got tired and no actual code was written I just read the instructions and some of the chapter lol
+tomorow might be a bit busy for me due to having two full classes and another full project 😭
+(off topic but another cursed thing about digital logic: we have to copy paste our verilog code onto plain microsoft word 😭 its so terrible)
+evilfrogking — 06/06/2024 9:44 PM
+you are so good man
+tomorrow i was gonna focus on collecting info, setting up the documentation including like a schedule guide, a todo list, and a chat log of our convos, and HOPEFULLY get a little code written
+I am not worried about it at all! i have class for one hour on friday (which i might have to miss anyways because i have an appartment inspection)
+and then im 100% focused on the CS final until sunday when I work. I am planning on dedicating 1-2 hours a day to study for calculus, but I was going to do that througout my cs studying (like if I got stuck)
+im also okay with like. if I feel like ive gotten pretty far to just shift focus on calculus until you are able to work on it some more. weve been working together for so long now i know we are gonna get it done hahaha
+evilfrogking — 06/06/2024 9:44 PM
+whaaaaaaaaa what the fuck nooooooo why 😭
+saturday was gonna be my big coding day, and then monday and tuesday
+Sam — 06/06/2024 9:46 PM
+heck yeah! Im also pretty confident we can get it done in time, CS crunch time is more enjoyable to me than other classes crunch time too 😭
+evilfrogking — 06/06/2024 9:47 PM
+dude same hahahaha
+so we wanna try it in c++? I think if saturday hits and im really struggling with it then ill just switch the python and let you know
+but i am like way more fresh with c++ so idk if python would really help me much
+Sam — 06/06/2024 9:48 PM
+hell yeah c++!
+I was looking for libraries yestderday, I think <map> and <vector> might be our bread and butter, 😭 I started with thinking about importing our old structures from last term and what we might want for our array/linked lists yestderday before realizing we dont have to build all of that anymore and we can just use vectors like normal people 😭
+evilfrogking — 06/06/2024 9:52 PM
+oh my god i was so scared reading your message hahaha like "wait why would we need to use our structures - oh thank god we can use vectors"
+god bless vectors my guy, truly unsung heroes
+[Meme depicting vectors and cooler arrays](https://cdn.discordapp.com/attachments/1100605396395233333/1248499889558786139/e73mycwq33j91.png?ex=666686a1&is=66653521&hm=773992c5850d5a73a1a55bce5f1e2690198fcd84dad0e1e9fdca7ff19b6257ec&)
 Sam — 06/06/2024 9:53 PM
 frfr
 lmao
