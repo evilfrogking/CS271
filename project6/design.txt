@@ -88,3 +88,25 @@ def extract_jump_var(parsed_list_elem):
     jump_var = parts[1]
     
     return jump_var
+
+# More CHATGPT code
+# I want the parsed lines to become keys in a dictionary where the values are their binary equivelents
+def create_binary_dict(parsed_lines):
+    # Initialize an empty dictionary
+    binary_dict = {}
+    
+    # Set up the keys from the parsed_lines list
+    for line in parsed_lines:
+        binary_dict[line] = None  # Setting the values to None for now
+    
+    return binary_dict
+
+# Example usage:
+parsed_lines = ["D=D+A", "A=M"]
+binary_dict = create_binary_dict(parsed_lines)
+
+# Now you can fill in the values later
+binary_dict["D=D+A"] = "101010"  # Assigning a value to the key "D=D+A"
+binary_dict["A=M"] = "111111"    # Assigning a value to the key "A=M"
+
+print(binary_dict)
