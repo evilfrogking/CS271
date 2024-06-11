@@ -7,29 +7,82 @@ Basic Idea:
 The hack_assembler.py program will take in a .asm file from the same folder, and read it line by line.
 It holds a list of each line, which it then determines if the each line in the list qualifies as an A-instruction,
 C-instruction, or L-instruction. We also need to designate our symbol table for the code, which is a dictionary
-of variables and their memory addresses and labels and their instruction lines. Comments are ignored. Once these have been distinguished, it will access the appropriate dictonaries
+of variables and their memory addresses and labels and their instruction lines. Comments are ignored.
+Once these have been distinguished, it will access the appropriate dictonaries
 to generate the binary code. 
-- For the A-instruction:
-- For the C-instruction:
-- For the L-instruction:
 The binary code is saved to a list, where it is then line by line written to a hack file.
 That file can now run in the CPU simulator.
+
+Program architature:
+*** From the textbook ***
+PART 1
+- Main
+- Parser:
+    -> Constructor(Args:input file/ Returns:): opens input file and gets ready to parse it
+    -> hasMoreCommands(Args: / Returns:Boolean): are there more commands in the input?
+    -> advance(Args: / Returns:): Reads the next command from the input and makes it the current command. Should be called only
+                                  if hasMoreCommands() is true. Initially there is no current command.
+    -> commandType(Args: / Returns:A_COMMAND, C_COMMAND, L_COMMAND): Returns the type of the current command:
+                                                                     A_COMMAND for @Xxx where Xxx is either a symbol or a decimal number
+                                                                     C_COMMAND for dest=comp;jump
+                                                                     L_COMMAND (actually, pseudo-command) for (Xxx) where Xxx is a symbol.
+    -> symbol(Args: / Returns:string): Returns the symbol or decimal Xxx of the current command @Xxx or (Xxx). Should be called
+                                       only when commandType() is A_COMMAND or L_COMMAND.
+    -> dest(Args: / Returns:string): Returns the dest mnemonic in the current C-command (8 possibilities). Should be called only
+                                     when commandType() is C_COMMAND.
+    -> comp(Args: / Returns:string): Returns the comp mnemonic in the current C-command (28 possibilities). Should be called only
+                                     when commandType() is C_COMMAND.
+    -> jump(Args: / Returns:string): Returns the jump mnemonic in the current C-command (8 possibilities). Should be called only
+                                     when commandType() is C_COMMAND
+- Code:
+    -> dest mnemonic (string) 3 bits Returns the binary code of the dest mnemonic.
+    -> comp mnemonic (string) 7 bits Returns the binary code of the comp mnemonic.
+    -> jump mnemonic (string) 3 bits Returns the binary code of the jump mnemonic.
+
+PART 2
+- Symbol
+    -> Constructor — — Creates a new empty symbol table.
+    -> addEntry symbol (string), address (int) — Adds the pair (symbol, address) to the table.
+    -> contains symbol (string) Boolean Does the symbol table contain the given symbol?
+    -> GetAddress symbol (string) int Returns the address associated with the symbol.
+
+    -> First pass: Go through the entire assembly program, line by line, and build the
+                   symbol table without generating any code. As you march through the program lines,
+                   keep a running number recording the ROM address into which the current command
+                   will be eventually loaded. This number starts at 0 and is incremented by 1 whenever
+                   a C-instruction or an A-instruction is encountered, but does not change when a label
+                   pseudocommand or a comment is encountered. Each time a pseudocommand (Xxx)
+                   is encountered, add a new entry to the symbol table, associating Xxx with the ROM
+                   address that will eventually store the next command in the program. This pass results
+                   in entering all the program’s labels along with their ROM addresses into the symbol
+                   table. The program’s variables are handled in the second pass.
+    -> second pass: Now go again through the entire program, and parse each line. Each
+                    time a symbolic A-instruction is encountered, namely, @Xxx where Xxx is a symbol
+                    and not a number, look up Xxx in the symbol table. If the symbol is found in the
+                    table, replace it with its numeric meaning and complete the command’s translation.
+                    If the symbol is not found in the table, then it must represent a new variable. To
+                    handle it, add the pair (Xxx, n) to the symbol table, where n is the next available
+                    RAM address, and complete the command’s translation. The allocated RAM
+                    addresses are consecutive numbers, starting at address 16 ( just after the addresses
+                    allocated to the predefined symbols).
 
 Starting questions:
 1. Do I need my program to deal with instruction size variance when mapping variables?
 2. How do I count program lines?
+    -> add a counter to the parser function?
 3. Should I handle case conventions?
-4. Am I going to have two lists? How do I want to store the binary code as I make it
+4. Am I going to have two lists? How do I want to store the binary code as I make it 
+    -> Maybe a dictionary where the key is the .asm line and the value is the binary line
 
 
-def a_instruction(parsed_list_elem, binary_list_elem):
-    pass
+---------------------------------------------------------------------------------------
+PARSER
+"Encapsulates access to the input code. Reads an assembly language com-
+mand, parses it, and provides convenient access to the command’s components
+(fields and symbols). In addition, removes all white space and comments."
 
-def c_instruction(parsed_list_elem, binary_list_elem):
-    pass
-
-def l_instruction(parsed_list_elem, binary_list_elem, symbol_table?):
-
+I believe we did this all in class. Our parser inputs a file, reads it line by line, discards white space and comments.
+Does the parser need to know 
 
 # TAKE 1
 # I think I should do this one line at a time
@@ -110,3 +163,12 @@ binary_dict["D=D+A"] = "101010"  # Assigning a value to the key "D=D+A"
 binary_dict["A=M"] = "111111"    # Assigning a value to the key "A=M"
 
 print(binary_dict)
+
+
+def a_instruction(parsed_list_elem, binary_list_elem):
+    pass
+
+def c_instruction(parsed_list_elem, binary_list_elem):
+    pass
+
+def l_instruction(parsed_list_elem, binary_list_elem):
