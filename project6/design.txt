@@ -1,0 +1,90 @@
+Design.txt
+
+After using the class code, I wanted to take some extra time to design some pseudocode,
+since the testing portion of programming has been mostly completed for us.
+
+Basic Idea:
+The hack_assembler.py program will take in a .asm file from the same folder, and read it line by line.
+It holds a list of each line, which it then determines if the each line in the list qualifies as an A-instruction,
+C-instruction, or L-instruction. We also need to designate our symbol table for the code, which is a dictionary
+of variables and their memory addresses and labels and their instruction lines. Comments are ignored. Once these have been distinguished, it will access the appropriate dictonaries
+to generate the binary code. 
+- For the A-instruction:
+- For the C-instruction:
+- For the L-instruction:
+The binary code is saved to a list, where it is then line by line written to a hack file.
+That file can now run in the CPU simulator.
+
+Starting questions:
+1. Do I need my program to deal with instruction size variance when mapping variables?
+2. How do I count program lines?
+3. Should I handle case conventions?
+4. Am I going to have two lists? How do I want to store the binary code as I make it
+
+
+def a_instruction(parsed_list_elem, binary_list_elem):
+    pass
+
+def c_instruction(parsed_list_elem, binary_list_elem):
+    pass
+
+def l_instruction(parsed_list_elem, binary_list_elem, symbol_table?):
+
+
+# TAKE 1
+# I think I should do this one line at a time
+# so I would run this in a for loop that looked at each element of the parsing list
+def find_dest(parsed_list_elem, binary_list_elem):
+    for char in parsed_list_elem:
+        if char == "=":
+            dest_dict = init_dest_lookup_dict()
+            for key in dest_dict:
+                if key == parsed_list_elem:
+                    binary_list_elem.append(dest_dict[key])
+        else:
+            binary_list_elem.append('000')
+    return parsed_list_elem, binary_list_elem
+
+# TAKE 2
+# I need to split the element in the list?
+# I forgot that "in" exists in Python
+def find_dest(parsed_list_elem, binary_list_elem):
+    dest_dict = init_dest_lookup_dict()
+    if parsed_list_elem in dest_dict:
+        binary_list_elem.append(dest_dict[parsed_list_elem])
+    else:
+        binary_list_elem.append('000')  # If no match, append '000'
+    return parsed_list_elem, binary_list_elem
+
+
+def find_jump(parsed_list_elem, binary_list, elem):
+    jump_dict = init_jump_lookup_dict()
+    if parsed_list_elem in dest_dict:
+        binary_list_elem.append(dest_dict[parsed_list_elem])
+    else:
+        binary_list_elem.append('000')  # If no match, append '000'
+    return parsed_list_elem, binary_list_elem
+
+# CHATGPT code
+def extract_dest_var(parsed_list_elem):
+    # Split the string at the '=' sign
+    parts = parsed_list_elem.split('=')
+    
+    # Take the part before the '=' sign
+    dest_var = parts[0]
+    
+    return dest_var
+
+# Example usage:
+parsed_list_elem = "D=D+A"
+dest_var = extract_dest_var(parsed_list_elem)
+print(dest_var)  # Output will be 'D'
+
+def extract_jump_var(parsed_list_elem):
+    # Split the string at the ';' sign
+    parts = parsed_list_elem.split(';')
+    
+    # Take the part before the '=' sign
+    jump_var = parts[1]
+    
+    return jump_var
