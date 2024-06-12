@@ -9,7 +9,7 @@
 > hack_assembler.py is the Hack Assembler for Nand2Tetris's project 6. The program inputs an assembly file using the sys library, converts it to hack line by line, then writes it to a new hack file. That hack file can then be run on the provided CPU simulator.
 > The pre-translated files are stored in their folders.
 >
-To compile:  
+To run:  
 - Main program: python .\hack_assembler.py Prog.asm
 
 
