@@ -64,7 +64,6 @@ def find_key(key, search_dict):
     else:
         return None
 
-
 def first_pass(parsed_list:list):
     """_summary_
 
@@ -77,15 +76,18 @@ def first_pass(parsed_list:list):
     line_count = 0
     symbol_dict = d.init_symbol_table_dict()
 
-    for line_count, line in enumerate(parsed_list):
+    for line in parsed_list:
         if line.startswith("("):
-            label = line
-            symbol_dict[label] = line_count + 1
-        line_count += 1
+            label = line.replace("(", "").replace(")", "")
+            symbol_dict[label] = format(line_count, '015b')
+        else:
+            line_count += 1
+    
     parsed_list = [line for line in parsed_list if not line.startswith('(')]
 
 
     return parsed_list, symbol_dict
+
 
 def second_pass(parsed_list, binary_list, symbol_dict):
     var_count = 16
@@ -105,20 +107,20 @@ def second_pass(parsed_list, binary_list, symbol_dict):
                                  "letters and numbers, but should not begin with a number.\n")
             else:
                 symbol_value = "0"
-            # EX @var or @var1
                 if after_at in symbol_dict:
                     symbol_value += find_key(after_at, symbol_dict)
                     binary_list.append(symbol_value)
                 else:
-                    binary_value = format(var_count, '015b')
-                    str_bin_value = str(binary_value)
-                    symbol_value = "0" + str_bin_value
+                    binary_value = format(var_count, '016b')  # Ensure 16 bits
+
+                    symbol_value += binary_value[-15:]  # Take only the last 15 bits
                     symbol_dict[after_at] = symbol_value
                     binary_list.append(symbol_dict[after_at])
                     var_count += 1
-                    # add to symbol table
         else:
             binary_list = c_instruct(line, binary_list)
+
+
     return binary_list
 
 
@@ -186,3 +188,9 @@ def write_to_hack_file(binary_list, input_filename):
     with open(output_filename, 'w', encoding="utf-8") as hack_file:
         for binary_line in binary_list:
             hack_file.write(binary_line + '\n')
+
+def ensure_16_bits(binary_list):
+    for i in range(len(binary_list)):
+        if len(binary_list[i]) > 16:
+            binary_list[i] = binary_list[i][1:]
+    return binary_list

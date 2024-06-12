@@ -1,6 +1,7 @@
 ''' Class code'''
 import sys
 import functions as f
+import dicts as d
 
 
 def main():
@@ -22,9 +23,13 @@ def main():
             parsed_lines.append(parsed_line)
 
     binary_lines = []
+
     binary_lines = f.generate_machine_code(parsed_lines, binary_lines)
 
+    binary_lines = f.ensure_16_bits(binary_lines)
+
     f.write_to_hack_file(binary_lines, input_filename)
+
 
     # write machine code to a file
 
