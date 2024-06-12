@@ -74,7 +74,27 @@ Starting questions:
 4. Am I going to have two lists? How do I want to store the binary code as I make it 
     -> Maybe a dictionary where the key is the .asm line and the value is the binary line
 
+First Pass ->
+1. Count lines and find labels - check that labels .isalpha()? DONE
+2.label has the same ROM address as the instruction below it (line+1) DONE
+3. add the label and ROM address to the symbol table - which is a dictionary DONE
+    - keys are labels or variables, values are ROM adressess or RAM addresses DONE
+4. Erase the label line from the parser list? DONE
+    - del parser_lines[line] <- remove this from the parser list? > no, use comprehension filter instead
 
+Second Pass ->
+1. read next instruction
+                              number after @ -- A_instruct
+                            /
+                         yes -- contains letter -- num and letter -- invalid
+                       /                        \
+2. start with @ or no?                            just letter or letter+num -- in the symbol table -- A-inst with label -- lookup symbol tabel -> return 15 bit address value
+                       \                                                    \
+                         no                                                   Not in the symbol table --A-inst with variable -- add to the symbol table with next available RAM position
+                           \
+                             split the instruction into 2 parts at = and ; d
+                                                    |
+                                                look up corresponding tables -- add tables together
 ---------------------------------------------------------------------------------------
 PARSER
 "Encapsulates access to the input code. Reads an assembly language com-

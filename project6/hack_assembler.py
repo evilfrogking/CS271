@@ -8,6 +8,7 @@ def main():
     # open file
     input_filename = sys.argv[1]
     input_file_contents = []
+
     with open(input_filename, "r", encoding="utf-8") as input_file:
         # read into a list
         input_file_contents = input_file.readlines()
@@ -21,10 +22,47 @@ def main():
 
     print(f"parsed_lines: {parsed_lines}")
 
+    # first pass() ?
+    line_count = 0
+    var_count = 0
+    VAR_REGISTER = 16
+    symbol_dict = init_symbol_table_dict()
+
+    for line_count, line in enumerate(parsed_lines):
+        # try and except here?
+        if "(" in line:
+            label = line
+            symbol_dict[label] = line_count + 1
+        elif line.startswith("@") and line[1].isalpha():
+            symbol_dict[line] = VAR_REGISTER + var_count
+            var_count += 1
+    parsed_lines = [line for line in parsed_lines if not line.startswith('(')]
+
+    print(parsed_lines)
+    print(symbol_dict)
+
     # generate machine code
-    # create generate machine code function, which 
+    # Second pass()?
+    for line in parsed_lines:
+        
+
 
     # write machine code to a file
+
+def init_symbol_table_dict() -> dict:
+    """_summary_
+
+    Args:
+        key_var (_type_): _description_
+
+    Returns:
+        dict: _description_
+    """
+    symbol_lookup = {}
+
+    return symbol_lookup
+
+
 
 
 def parse(input_line: str) -> str:
@@ -46,6 +84,8 @@ def parse(input_line: str) -> str:
     for char in output_line:
         if char == " ":
             output_line = output_line.replace(" ", "")
+
+
 
     return output_line
 
