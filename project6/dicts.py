@@ -2,10 +2,10 @@
 """
 
 def init_comp_lookup_dict() -> dict:
-    """_summary_
+    """ Dictionary for the comp bits of the binary string.
 
     Returns:
-        dict: _description_
+        dict: initialized comp dictionary
     """
     # build comp look up dict as a comp instruction as the key and its control bits as the value
     comp_lookup = {}
@@ -43,10 +43,10 @@ def init_comp_lookup_dict() -> dict:
     return comp_lookup
 
 def init_dest_lookup_dict() -> dict:
-    """_summary_
+    """Dictionary for the dest bits of the binary string.
 
     Returns:
-        dict: _description_
+        dict: initialized dest dictionary
     """
     # build dest look up dict as a comp instruction as the key and its control bits as the value
     dest_lookup = {}
@@ -76,10 +76,10 @@ def init_dest_lookup_dict() -> dict:
     return dest_lookup
 
 def init_jump_lookup_dict() -> dict:
-    """_summary_
+    """Dictionary for the jump bits of the binary string.
 
     Returns:
-        dict: _description_
+        dict: initialized jump dictionary
     """
     # build jump look up dict as a comp instruction as the key and its control bits as the value
     jump_lookup = {}
@@ -96,7 +96,7 @@ def init_jump_lookup_dict() -> dict:
     return jump_lookup
 
 def init_symbol_table_dict() -> dict:
-    """_summary_
+    """ictionary for the symbol table of the binary string.
 
     Args:
         key_var (_type_): _description_
