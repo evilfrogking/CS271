@@ -39,18 +39,6 @@ def is_valid_variable_name(name):
         return False
     return True
 
-# def split_line(line):
-#     """Split line into components."""
-#     components = line.split('=')
-#     dest = components[0] if components[0] else "null"  # Save the destination (before "="), or "null" if empty
-#     if len(components) == 2:  # If "=" is present
-#         components = components[1].split(';')  # Split the part after "=" by ";"
-#         comp = components[0]  # Save the computation part (between "=" and ";")
-#         jump = components[1] if len(components) > 1 and components[1] else "null"  # Save the jump part (after ";"), or "null" if empty
-#     else:  # If "=" is not present
-#         comp = components[0]  # Save the computation part as the whole line
-#         jump = "null"  # No jump part, so return "null"
-#     return comp, dest, jump
 
 def split_line(line):
     """Split line into components."""
@@ -87,23 +75,20 @@ def first_pass(parsed_list:list):
         _type_: _description_
     """
     line_count = 0
-    var_count = 0
-    VAR_REGISTER = 16
     symbol_dict = d.init_symbol_table_dict()
 
     for line_count, line in enumerate(parsed_list):
         if line.startswith("("):
             label = line
             symbol_dict[label] = line_count + 1
-        elif line.startswith("@"):
-            symbol_dict[line] = VAR_REGISTER + var_count
-            var_count += 1
+        line_count += 1
     parsed_list = [line for line in parsed_list if not line.startswith('(')]
 
 
     return parsed_list, symbol_dict
 
 def second_pass(parsed_list, binary_list, symbol_dict):
+    var_count = 16
     for line in parsed_list:
         if line.startswith("@"):
             valid_var = is_valid_variable_name(line)
@@ -119,17 +104,23 @@ def second_pass(parsed_list, binary_list, symbol_dict):
                                  "Please review input file. Variables should contain letters or "
                                  "letters and numbers, but should not begin with a number.\n")
             else:
+                symbol_value = "0"
             # EX @var or @var1
-                if after_at.isalnum():
-                    if after_at in symbol_dict:
-                        pass
-                        # A-instrct
-                    else:
-                        pass
-                        # add to symbol table
+                if after_at in symbol_dict:
+                    symbol_value += find_key(after_at, symbol_dict)
+                    binary_list.append(symbol_value)
+                else:
+                    binary_value = format(var_count, '015b')
+                    str_bin_value = str(binary_value)
+                    symbol_value = "0" + str_bin_value
+                    symbol_dict[after_at] = symbol_value
+                    binary_list.append(symbol_dict[after_at])
+                    var_count += 1
+                    # add to symbol table
         else:
             binary_list = c_instruct(line, binary_list)
     return binary_list
+
 
 
 def generate_machine_code(parsed_list, binary_list) -> str:
@@ -141,9 +132,7 @@ def generate_machine_code(parsed_list, binary_list) -> str:
     Returns:
         str: _description_
     """
-    #take line, check for A_instruction, C_instruction, or L_instruction, break line into components
-    # as needed, interact with symbol table as needed
-    # use lookup dictionaries to translate asm to hack and return hack
+
     parsed_list, symbol_dict = first_pass(parsed_list)
     binary_list = second_pass(parsed_list, binary_list, symbol_dict)
 

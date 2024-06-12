@@ -88,7 +88,7 @@ Second Pass ->
                             /
                          yes -- contains letter -- num and letter -- invalid
                        /                        \
-2. start with @ or no?                            just letter or letter+num -- in the symbol table -- A-inst with label -- lookup symbol tabel -> return 15 bit address value
+2. start with @ or no?                            just letter or letter+num -- in the symbol table -- A-inst with variable -- lookup symbol tabel -> return 15 bit address value
                        \                                                    \
                          no                                                   Not in the symbol table --A-inst with variable -- add to the symbol table with next available RAM position
                            \

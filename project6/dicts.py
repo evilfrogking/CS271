@@ -106,5 +106,29 @@ def init_symbol_table_dict() -> dict:
     """
     symbol_lookup = {}
 
+    symbol_lookup['SP']     = "000000000000000"
+    symbol_lookup['LCL']    = "000000000000001"
+    symbol_lookup['ARG']    = "000000000000010"
+    symbol_lookup['THIS']   = "000000000000011"
+    symbol_lookup['THAT']   = "000000000000100"
+    symbol_lookup['R0']     = "000000000000000"
+    symbol_lookup['R1']     = "000000000000001"
+    symbol_lookup['R2']     = "000000000000010"
+    symbol_lookup['R3']     = "000000000000011"
+    symbol_lookup['R4']     = "000000000000100"
+    symbol_lookup['R5']     = "000000000000101"
+    symbol_lookup['R6']     = "000000000000110"
+    symbol_lookup['R7']     = "000000000000111"
+    symbol_lookup['R8']     = "000000000001000"
+    symbol_lookup['R9']     = "000000000001001"
+    symbol_lookup['R10']    = "000000000001010"
+    symbol_lookup['R11']    = "000000000001011"
+    symbol_lookup['R12']    = "000000000001100"
+    symbol_lookup['R13']    = "000000000001101"
+    symbol_lookup['R14']    = "000000000001110"
+    symbol_lookup['R15']    = "000000000001111"
+    symbol_lookup['SCREEN'] = "100000000000000"
+    symbol_lookup['KBD']    = "110000000000000"
+
     return symbol_lookup
 
