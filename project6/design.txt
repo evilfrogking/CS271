@@ -95,6 +95,7 @@ Second Pass ->
                              split the instruction into 2 parts at = and ; d
                                                     |
                                                 look up corresponding tables -- add tables together
+
 ---------------------------------------------------------------------------------------
 PARSER
 "Encapsulates access to the input code. Reads an assembly language com-
