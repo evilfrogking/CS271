@@ -26,8 +26,6 @@ def main():
 
     binary_lines = f.generate_machine_code(parsed_lines, binary_lines)
 
-    binary_lines = f.ensure_16_bits(binary_lines)
-
     f.write_to_hack_file(binary_lines, input_filename)
 
 

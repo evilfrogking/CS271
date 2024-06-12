@@ -79,7 +79,7 @@ def first_pass(parsed_list:list):
     for line in parsed_list:
         if line.startswith("("):
             label = line.replace("(", "").replace(")", "")
-            symbol_dict[label] = format(line_count, '015b')
+            symbol_dict[label] = format(line_count, '016b')
         else:
             line_count += 1
     
@@ -106,15 +106,14 @@ def second_pass(parsed_list, binary_list, symbol_dict):
                                  "Please review input file. Variables should contain letters or "
                                  "letters and numbers, but should not begin with a number.\n")
             else:
-                symbol_value = "0"
                 if after_at in symbol_dict:
-                    symbol_value += find_key(after_at, symbol_dict)
+                    symbol_value = find_key(after_at, symbol_dict)
                     binary_list.append(symbol_value)
                 else:
+                    symbol_value = ""
                     binary_value = format(var_count, '016b')  # Ensure 16 bits
 
-                    symbol_value += binary_value[-15:]  # Take only the last 15 bits
-                    symbol_dict[after_at] = symbol_value
+                    symbol_dict[after_at] = binary_value
                     binary_list.append(symbol_dict[after_at])
                     var_count += 1
         else:
@@ -189,8 +188,8 @@ def write_to_hack_file(binary_list, input_filename):
         for binary_line in binary_list:
             hack_file.write(binary_line + '\n')
 
-def ensure_16_bits(binary_list):
-    for i in range(len(binary_list)):
-        if len(binary_list[i]) > 16:
-            binary_list[i] = binary_list[i][1:]
-    return binary_list
+# def ensure_16_bits(binary_list):
+#     for i in range(len(binary_list)):
+#         if len(binary_list[i]) > 16:
+#             binary_list[i] = binary_list[i][1:]
+#     return binary_list
