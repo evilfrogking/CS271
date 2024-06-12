@@ -1,4 +1,8 @@
-"""_summary_
+"""
+File: dicts.py
+Author: Aspen Frazee
+Date: 6/12/2024
+Summary: File for dictionaries used in the hack_assembler.py
 """
 
 def init_comp_lookup_dict() -> dict:
@@ -96,14 +100,10 @@ def init_jump_lookup_dict() -> dict:
     return jump_lookup
 
 def init_symbol_table_dict() -> dict:
-    """ictionary for the symbol table of the binary string.
-
-    Args:
-        key_var (_type_): _description_
+    """Dictionary for the symbol table of the binary string.
 
     Returns:
-        dict: _description_
-    """
+        dict: initialized symbol table
     symbol_lookup = {}
 
     symbol_lookup['SP']     = "0000000000000000"
