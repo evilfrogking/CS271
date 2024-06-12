@@ -61,7 +61,7 @@ def init_dest_lookup_dict() -> dict:
 
     dest_lookup["DM"]  = "011"
     dest_lookup["MD"]  = "011"
-    
+
     dest_lookup["A"]   = "100"
 
     dest_lookup["AM"]  = "101"
@@ -104,6 +104,7 @@ def init_symbol_table_dict() -> dict:
 
     Returns:
         dict: initialized symbol table
+    """
     symbol_lookup = {}
 
     symbol_lookup['SP']     = "0000000000000000"
@@ -131,4 +132,3 @@ def init_symbol_table_dict() -> dict:
     symbol_lookup['KBD']    = "0110000000000000"
 
     return symbol_lookup
-

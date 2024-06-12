@@ -8,6 +8,7 @@ Summary: File for functions used in the hack_assembler.py
 import re
 import dicts as d
 
+
 def parse(input_line: str) -> str:
     """Chews up the input lines and spits out pretty chunks for the assembler.
 
@@ -17,22 +18,27 @@ def parse(input_line: str) -> str:
     Returns:
         str: A cleaned up line to become an element in the parsed_lines list.
     """
-    # strip whitespace
     output_line = input_line.strip()
 
-    # double forward slash detector with split
     # makes the line a list, assigns the first elem to the variable, disposes of the rest
     output_line = output_line.split('//')[0]
-    # removes any whitespace in a line
+
     for char in output_line:
         if char == " ":
             output_line = output_line.replace(" ", "")
 
     return output_line
 
+
 def is_valid_variable_name(name):
-    """Check if a variable name is valid."""
-    # Check if the second character is not a digit
+    """Check if a variable name is valid.
+
+    Args:
+        name (variable): @variable
+
+    Returns:
+        Boolean: confirms if the variable name is valid, otherwise false.
+    """
     if name[1].isdigit():
         return False
     # Check if the name contains only allowed characters after the first character
@@ -42,37 +48,56 @@ def is_valid_variable_name(name):
 
 
 def split_line(line):
-    """Split line into components."""
-    dest = "null"  # Initialize dest with a default value
-    jump = "null"  # Initialize jump with a default value
-    
+    """Split line into components; only c-instructions.
+
+    Args:
+        line (string): parsed lines to be split into it's components.
+
+    Returns:
+        str: returns the str segments of comp, dest, and jump
+    """
+    dest = "null"
+    jump = "null"
+
     if "=" in line:
         dest, comp_and_jump = line.split("=")
     else:
-        comp_and_jump = line  # If "=" is not present, the whole line is computation and jump
-    
+        comp_and_jump = line
+
     if ";" in comp_and_jump:
         comp, jump = comp_and_jump.split(";")
     else:
-        comp = comp_and_jump  # If ";" is not present, the whole comp_and_jump is computation
-    
+        comp = comp_and_jump
+
     return comp, dest, jump
 
+
 def find_key(key, search_dict):
-    """Search for dest in symbol_dict and return its value."""
+    """Search for dest in symbol_dict and return its value.
+
+    Args:
+        key (str): variable to be searched for in dictionary.
+        search_dict (dict): Dictionary of choice for the desired value.
+
+    Returns:
+        str: returns the corresponding binary string.
+    """
     if key in search_dict:
         return search_dict[key]
     else:
         return None
 
+
 def first_pass(parsed_list:list):
-    """_summary_
+    """First pass counts the number of lines, builds the labels into the symbol table,
+    and 
 
     Args:
-        parsed_list (list): _description_
+        parsed_list (list): List of lines from the input file.
 
     Returns:
-        _type_: _description_
+        parsed_list: returns a list sans labels
+        symbol_dict: returns the newly build symbol table
     """
     line_count = 0
     symbol_dict = d.init_symbol_table_dict()
@@ -83,14 +108,25 @@ def first_pass(parsed_list:list):
             symbol_dict[label] = format(line_count, '016b')
         else:
             line_count += 1
-    
     parsed_list = [line for line in parsed_list if not line.startswith('(')]
-
 
     return parsed_list, symbol_dict
 
 
 def second_pass(parsed_list, binary_list, symbol_dict):
+    """Takes the parsed pieces and assigns them to the correct function for translation, then combines them.
+
+    Args:
+        parsed_list (list): list of  lines from the input file
+        binary_list (list): list of lines for the output file
+        symbol_dict (dict): symbols table
+
+    Raises:
+        ValueError: Checks for valid variables in input file.
+
+    Returns:
+        binary_list: updated list of lines for the output file
+    """
     var_count = 16
     for line in parsed_list:
         if line.startswith("@"):
@@ -112,7 +148,7 @@ def second_pass(parsed_list, binary_list, symbol_dict):
                     binary_list.append(symbol_value)
                 else:
                     symbol_value = ""
-                    binary_value = format(var_count, '016b')  # Ensure 16 bits
+                    binary_value = format(var_count, '016b') 
 
                     symbol_dict[after_at] = binary_value
                     binary_list.append(symbol_dict[after_at])
@@ -120,19 +156,18 @@ def second_pass(parsed_list, binary_list, symbol_dict):
         else:
             binary_list = c_instruct(line, binary_list)
 
-
     return binary_list
 
 
-
 def generate_machine_code(parsed_list, binary_list) -> str:
-    """ 
+    """ Combines first and second pass for main file clarity.
 
     Args:
-        line (str): _description_
+        parsed_list (list): list of  lines from the input file
+        binary_list (list): list of lines for the output file
 
     Returns:
-        str: _description_
+        binary_list: updated list of lines for the output file
     """
 
     parsed_list, symbol_dict = first_pass(parsed_list)
@@ -140,7 +175,17 @@ def generate_machine_code(parsed_list, binary_list) -> str:
 
     return binary_list
 
+
 def a_instruct(line, binary_list):
+    """Instructions for numerical registers.
+
+    Args:
+        line (str): section of a line from the source file
+        binary_list (list): list of lines for the output file
+
+    Returns:
+        _binary_list: updated list of lines for the output file
+    """
     line = line[1:]
     num = int(line)
     binary_num = '0'
@@ -154,7 +199,20 @@ def a_instruct(line, binary_list):
 
 
 def c_instruct(line, binary_list) -> list:
-    #turn this into the C_instruction function
+    """_summary_
+
+    Args:
+        line (str): section of a line from the source file
+        binary_list (list): list of lines for the output file
+
+    Raises:
+        KeyError: key not found in comp dictionary
+        KeyError: key not found in dest dictionary
+        KeyError: key not found in jump dictionary
+
+    Returns:
+        binary_list: updated list of lines for the output file
+    """
     binary_line = "111"
     comp, dest, jump = split_line(line)
 
@@ -180,17 +238,16 @@ def c_instruct(line, binary_list) -> list:
 
     return binary_list
 
-def l_instruct():
-    pass
 
 def write_to_hack_file(binary_list, input_filename):
+    """Outputs the binary list to a .hack file for the CPU.
+    Uses the input files name and adds my name to the end.
+
+    Args:
+        binary_list (list): list of lines for the output file
+        input_filename (str): Name of the input file
+    """
     output_filename = input_filename.rsplit('.', 1)[0] + '_aspen.hack'
     with open(output_filename, 'w', encoding="utf-8") as hack_file:
         for binary_line in binary_list:
             hack_file.write(binary_line + '\n')
-
-# def ensure_16_bits(binary_list):
-#     for i in range(len(binary_list)):
-#         if len(binary_list[i]) > 16:
-#             binary_list[i] = binary_list[i][1:]
-#     return binary_list
