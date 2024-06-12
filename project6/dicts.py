@@ -54,11 +54,24 @@ def init_dest_lookup_dict() -> dict:
     dest_lookup["null"]    = "000"
     dest_lookup["M"]   = "001"
     dest_lookup["D"]   = "010"
+
     dest_lookup["DM"]  = "011"
+    dest_lookup["MD"]  = "011"
+    
     dest_lookup["A"]   = "100"
+
     dest_lookup["AM"]  = "101"
+    dest_lookup["MA"]  = "101"
+
     dest_lookup["AD"]  = "110"
+    dest_lookup["DA"]  = "110"
+
     dest_lookup["ADM"] = "111"
+    dest_lookup["AMD"] = "111"
+    dest_lookup["DAM"] = "111"
+    dest_lookup["DMA"] = "111"
+    dest_lookup["MAD"] = "111"
+    dest_lookup["MDA"] = "111"
 
     return dest_lookup
 

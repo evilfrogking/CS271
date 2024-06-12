@@ -21,12 +21,10 @@ def main():
         if parsed_line != "":
             parsed_lines.append(parsed_line)
 
-    print(f"Parsed lines (main): {parsed_lines}")
-
     binary_lines = []
     binary_lines = f.generate_machine_code(parsed_lines, binary_lines)
 
-    print(binary_lines)
+    f.write_to_hack_file(binary_lines, input_filename)
 
     # write machine code to a file
 
