@@ -1,20 +1,21 @@
-"""_summary_
-
-Returns:
-    _type_: _description_
+"""
+File: functions.py
+Author: Aspen Frazee
+Date: 6/12/2024
+Summary: File for functions used in the hack_assembler.py
 """
 
 import re
 import dicts as d
 
 def parse(input_line: str) -> str:
-    """_summary_
+    """Chews up the input lines and spits out pretty chunks for the assembler.
 
     Args:
-        input_line (str): _description_
+        input_line (str): A line from the input file.
 
     Returns:
-        str: _description_
+        str: A cleaned up line to become an element in the parsed_lines list.
     """
     # strip whitespace
     output_line = input_line.strip()
